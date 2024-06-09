@@ -7,7 +7,7 @@ A simple userbot to scrape cards from chats
 
 `cd pyroscrapper`
 
-`pip3 install requirements.txt`
+`pip3 install -r requirements.txt`
 
 `python3 main.py`
 
