@@ -32,7 +32,7 @@ async def my_handler(client, message):
 {k.get_text()[62:]}
 """
         try:
-            await app.send_message("rescrape", MSG)
+            await app.send_message("rescrape", MSG) # set your channel username where you want cards should get posted i have set rescrape
         except FloodWait as e:
             await asyncio.sleep(e.value)
 
