@@ -12,6 +12,7 @@ from pyrogram.errors import FloodWait
 
 API_ID = input("api_id=> ")
 API_HASH = input("api_hash=> ")
+CHANNEL_USERNAME = str(input("channel_username=> "))
 
 app = Client("my_account", API_ID, API_HASH)
 
@@ -36,10 +37,10 @@ async def my_handler(client, message):
 {k.get_text()[62:]}
 """
         try:
-            await app.send_message("rescrape", MSG)
+            await app.send_message(CHANNEL_USERNAME, MSG)
         except FloodWait as e:
             await asyncio.sleep(e.value)
-            await app.send_message("rescrape", MSG)
+            await app.send_message(CHANNEL_USERNAME, MSG)
 
             
 app.run()
