@@ -4,7 +4,9 @@ import requests
 import asyncio
 
 from pyrogram import Client, filters
+from pyrogram.types import Message
 from bs4 import BeautifulSoup as bs
+from platform import python_version
 from pyrogram.errors import FloodWait
 
 
@@ -16,11 +18,13 @@ app = Client("my_account", API_ID, API_HASH)
 logging.basicConfig(level=logging.INFO)
 
 
+@app.on_message(filters.command(["alive", "start"], ".") & filters.me)
+async def module_alive(client: Client, message: Message):
+    await message.edit(f"**Userbot working fine**\n**Python:** {python_version()}")
+
+
 @app.on_message()
 async def my_handler(client, message):
-    me = await app.get_me()
-    # if message.peer_id == me.id: # skip cards if sending from client
-        # return
     if re.match(r'\d{15,16}', str(message.text)):
         BIN = re.search(r'\d{15,16}', str(message.text))[0][:6]
         r = requests.get(f'https://bins.ws/search?bins={BIN}')
@@ -32,9 +36,10 @@ async def my_handler(client, message):
 {k.get_text()[62:]}
 """
         try:
-            await app.send_message("rescrape", MSG) # set your channel username where you want cards should get posted i have set rescrape
+            await app.send_message("rescrape", MSG)
         except FloodWait as e:
             await asyncio.sleep(e.value)
+            await app.send_message("rescrape", MSG)
 
             
 app.run()
