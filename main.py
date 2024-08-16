@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup as bs
 from platform import python_version
 from pyrogram.errors import FloodWait
 
-
 API_ID = input("api_id=> ")
 API_HASH = input("api_hash=> ")
 CHANNEL_USERNAME = str(input("channel_username=> "))
